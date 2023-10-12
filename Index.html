@@ -84,22 +84,10 @@
             ['', '', ''],
             ['', '', '']
         ];
+        let szabadhelyek = [0,1,2,3,4,5,6,7,8]
 
-        function makeMove(row, col) {
-            if (board[row][col] === '' && !isGameOver()) {
-                board[row][col] = currentPlayer;
-                document.getElementById('board').children[row * 3 + col].innerText = currentPlayer;
-                currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
-
-                if (isGameOver()) {
-                    document.getElementById('result').innerText = 'Vége a játéknak! ' + (currentPlayer === 'X' ? 'O' : 'X') + ' győzött!';
-                } else if (boardIsFull()) {
-                    document.getElementById('result').innerText = 'Ez egy döntetlen!';
-                }
-            }
-        }
         function makeComputerMove() {
-            if (!isGameOver() && currentPlayer === 'O') {
+            if (!isGameOver() && currentPlayer === 'X') {
                 let emptyCells = [];
                 for (let i = 0; i < 3; i++) {
                     for (let j = 0; j < 3; j++) {
@@ -138,8 +126,19 @@
         function makeMove(row, col) {
             currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
 
-            if (!isGameOver() && currentPlayer === 'O') {
+            if (!isGameOver() && currentPlayer === 'X') {
                 makeComputerMove();
+            }
+            if (board[row][col] === '' && !isGameOver()) {
+                board[row][col] = currentPlayer;
+                document.getElementById('board').children[row * 3 + col].innerText = currentPlayer;
+                currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+
+                if (isGameOver()) {
+                    document.getElementById('result').innerText = 'Vége a játéknak! ' + (currentPlayer === 'X' ? 'O' : 'X') + ' győzött!';
+                } else if (boardIsFull()) {
+                    document.getElementById('result').innerText = 'Ez egy döntetlen!';
+                }
             }
         }
 
